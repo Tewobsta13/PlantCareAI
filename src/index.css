@@ -1,0 +1,82 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Base rules carried over from the Stitch export. */
+@layer base {
+  html,
+  body {
+    margin: 0;
+    padding: 0;
+  }
+  body {
+    overscroll-behavior: none;
+  }
+  main > :first-child {
+    margin-top: 0 !important;
+  }
+  main > :last-child {
+    margin-bottom: 0 !important;
+  }
+  /* Visible keyboard focus (the export had none). */
+  :focus-visible {
+    outline: 2px solid #156c3f;
+    outline-offset: 2px;
+  }
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+/* Icon font helper (class normally supplied by the Google Fonts CSS). */
+.material-symbols-outlined {
+  font-variation-settings:
+    'FILL' 0,
+    'wght' 400,
+    'GRAD' 0,
+    'opsz' 24;
+}
+.icon-filled {
+  font-variation-settings:
+    'FILL' 1,
+    'wght' 400,
+    'GRAD' 0,
+    'opsz' 24;
+}
+
+/* Scan-line animation for the "analyzing" state. */
+@keyframes scan-sweep {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(100%);
+  }
+}
+.animate-scan-sweep {
+  animation: scan-sweep 1.6s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-scan-sweep,
+  .animate-spin {
+    animation: none !important;
+  }
+}
+
+/* "Download Field Report" uses the browser's print dialog (Save as PDF). */
+@media print {
+  header,
+  footer,
+  .no-print,
+  [aria-label='About this demo build'] {
+    display: none !important;
+  }
+  main {
+    padding-top: 0 !important;
+  }
+  button[aria-expanded] {
+    display: none !important;
+  }
+}
